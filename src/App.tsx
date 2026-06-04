@@ -53,7 +53,7 @@ async function shareNote(note: Note) {
   if (navigator.share) {
     try {
       await navigator.share({
-        title: `ScreenNotes AI — ${note.type}`,
+        title: `ScreenNote — ${note.type}`,
         text: note.content,
         url,
       });
@@ -110,7 +110,7 @@ function fireNotification(note: Note) {
   if (!("Notification" in window) || Notification.permission !== "granted") return;
 
   try {
-    const n = new Notification("🔔 ScreenNotes Alarm", {
+    const n = new Notification("🔔 ScreenNote Alarm", {
       body: note.content.slice(0, 120),
       tag: note.id,
       requireInteraction: true,
@@ -466,7 +466,7 @@ export default function App() {
       {/* Background */}
       <div className="pointer-events-none fixed inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_-10%,rgba(139,92,246,0.25),transparent_60%),radial-gradient(40%_40%_at_100%_0%,rgba(56,189,248,0.15),transparent_50%),radial-gradient(40%_40%_at_0%_100%,rgba(236,72,153,0.12),transparent_50%)]" />
-        <div className="absolute inset-0 opacity-[0.04] mix-blend-soft-light" style={{backgroundImage:`repeating-linear-gradient(0deg, #fff 0px, #fff 1px, transparent 1px, transparent 24px),repeating-linear-gradient(90deg, #fff 0px, #fff 1px, transparent 1px, transparent 24px)`}} />
+        <div className="absolute inset-0 opacity-[0.04] mix-blend-soft-light" style={{ backgroundImage: `repeating-linear-gradient(0deg, #fff 0px, #fff 1px, transparent 1px, transparent 24px),repeating-linear-gradient(90deg, #fff 0px, #fff 1px, transparent 1px, transparent 24px)` }} />
       </div>
 
       {/* Toast */}
@@ -482,15 +482,15 @@ export default function App() {
           <div className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 shadow-lg shadow-violet-500/25">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-white">
-                <path d="M4 8V6a2 2 0 0 1 2-2h2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-                <path d="M4 16v2a2 2 0 0 0 2 2h2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-                <path d="M16 4h2a2 2 0 0 1 2 2v2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-                <path d="M16 20h2a2 2 0 0 0 2-2v-2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-                <rect x="7" y="9" width="10" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.8"/>
+                <path d="M4 8V6a2 2 0 0 1 2-2h2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                <path d="M4 16v2a2 2 0 0 0 2 2h2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                <path d="M16 4h2a2 2 0 0 1 2 2v2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                <path d="M16 20h2a2 2 0 0 0 2-2v-2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                <rect x="7" y="9" width="10" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.8" />
               </svg>
             </div>
             <div>
-              <h1 className="text-[22px] font-semibold tracking-tight">ScreenNotes AI</h1>
+              <h1 className="text-[22px] font-semibold tracking-tight">ScreenNote</h1>
               <p className="text-xs text-zinc-400 -mt-0.5">Turn screenshots into actionable notes & reminders</p>
             </div>
           </div>
@@ -498,17 +498,15 @@ export default function App() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setActiveTab("workspace")}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
-                activeTab === "workspace" ? "bg-white/10 text-white" : "text-zinc-400 hover:text-zinc-200"
-              }`}
+              className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${activeTab === "workspace" ? "bg-white/10 text-white" : "text-zinc-400 hover:text-zinc-200"
+                }`}
             >
               Workspace
             </button>
             <button
               onClick={() => setActiveTab("guide")}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
-                activeTab === "guide" ? "bg-white/10 text-white" : "text-zinc-400 hover:text-zinc-200"
-              }`}
+              className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${activeTab === "guide" ? "bg-white/10 text-white" : "text-zinc-400 hover:text-zinc-200"
+                }`}
             >
               Setup Guide
             </button>
@@ -534,7 +532,7 @@ export default function App() {
                     className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border border-dashed border-white/15 bg-white/[0.02] py-6 text-sm text-zinc-300 transition hover:border-violet-500/50 hover:bg-violet-500/10 hover:text-white"
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                      <path d="M12 5v14M5 12h14" strokeLinecap="round"/>
+                      <path d="M12 5v14M5 12h14" strokeLinecap="round" />
                     </svg>
                     Drop screenshots or click
                   </button>
@@ -585,11 +583,10 @@ export default function App() {
                     <button
                       key={s.id}
                       onClick={() => setSelectedShotId(s.id)}
-                      className={`group flex w-full items-center gap-3 rounded-2xl border p-2 text-left transition ${
-                        selectedShotId === s.id
-                          ? "border-violet-500/50 bg-violet-500/10"
-                          : "border-transparent hover:border-white/10 hover:bg-white/[0.04]"
-                      }`}
+                      className={`group flex w-full items-center gap-3 rounded-2xl border p-2 text-left transition ${selectedShotId === s.id
+                        ? "border-violet-500/50 bg-violet-500/10"
+                        : "border-transparent hover:border-white/10 hover:bg-white/[0.04]"
+                        }`}
                     >
                       <div className="relative h-14 w-14 overflow-hidden rounded-xl bg-zinc-900">
                         <img src={s.dataUrl} alt="" className="h-full w-full object-cover" />
@@ -602,11 +599,10 @@ export default function App() {
                       <div className="min-w-0 flex-1">
                         <div className="truncate text-sm font-medium text-zinc-200">{s.name}</div>
                         <div className="mt-0.5 flex items-center gap-2">
-                          <span className={`h-1.5 w-1.5 rounded-full ${
-                            s.status === "done" ? "bg-emerald-500" :
+                          <span className={`h-1.5 w-1.5 rounded-full ${s.status === "done" ? "bg-emerald-500" :
                             s.status === "processing" ? "bg-amber-500 animate-pulse" :
-                            s.status === "error" ? "bg-red-500" : "bg-zinc-600"
-                          }`} />
+                              s.status === "error" ? "bg-red-500" : "bg-zinc-600"
+                            }`} />
                           <span className="text-[11px] capitalize text-zinc-500">{s.status}</span>
                         </div>
                       </div>
@@ -623,7 +619,7 @@ export default function App() {
                   {/* Toolbar */}
                   <div className="flex flex-wrap items-center gap-2">
                     <div className="relative flex-1 min-w-[200px]">
-                      <svg className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-zinc-600" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                      <svg className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-zinc-600" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
                       <input
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
@@ -636,9 +632,8 @@ export default function App() {
                         <button
                           key={t}
                           onClick={() => setFilterType(t)}
-                          className={`rounded-lg px-2.5 py-1 text-xs font-medium capitalize transition ${
-                            filterType === t ? "bg-white/10 text-white" : "text-zinc-400 hover:text-zinc-200"
-                          }`}
+                          className={`rounded-lg px-2.5 py-1 text-xs font-medium capitalize transition ${filterType === t ? "bg-white/10 text-white" : "text-zinc-400 hover:text-zinc-200"
+                            }`}
                         >
                           {t}
                         </button>
@@ -646,11 +641,10 @@ export default function App() {
                     </div>
                     <button
                       onClick={() => setShowCompleted((v) => !v)}
-                      className={`rounded-xl border px-3 py-2 text-xs font-medium transition ${
-                        showCompleted
-                          ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
-                          : "border-white/10 bg-white/[0.04] text-zinc-400 hover:text-zinc-200"
-                      }`}
+                      className={`rounded-xl border px-3 py-2 text-xs font-medium transition ${showCompleted
+                        ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
+                        : "border-white/10 bg-white/[0.04] text-zinc-400 hover:text-zinc-200"
+                        }`}
                     >
                       {showCompleted ? "Hide done" : "Show done"}
                     </button>
@@ -680,7 +674,7 @@ export default function App() {
                     {filteredNotes.length === 0 && (
                       <div className="rounded-2xl border border-dashed border-white/10 py-16 text-center">
                         <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/5">
-                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-zinc-600"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h10M7 13h6"/></svg>
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-zinc-600"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M7 9h10M7 13h6" /></svg>
                         </div>
                         <p className="text-sm text-zinc-400">No notes yet. Upload a screenshot to extract tasks.</p>
                       </div>
@@ -688,33 +682,30 @@ export default function App() {
                     {filteredNotes.map((n) => (
                       <div
                         key={n.id}
-                        className={`group relative rounded-2xl border p-4 transition ${
-                          n.completed
-                            ? "border-white/5 bg-white/[0.02] opacity-60"
-                            : "border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.03] hover:border-white/20"
-                        } ${n.reminderTime && !n.alarmFired && !n.completed ? "ring-1 ring-rose-500/30" : ""}`}
+                        className={`group relative rounded-2xl border p-4 transition ${n.completed
+                          ? "border-white/5 bg-white/[0.02] opacity-60"
+                          : "border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.03] hover:border-white/20"
+                          } ${n.reminderTime && !n.alarmFired && !n.completed ? "ring-1 ring-rose-500/30" : ""}`}
                       >
                         <div className="flex items-start gap-3">
                           {/* Checkbox */}
                           <button
                             onClick={() => updateNote(n.id, { completed: !n.completed })}
-                            className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition ${
-                              n.completed
-                                ? "border-emerald-500 bg-emerald-500"
-                                : "border-zinc-700 hover:border-violet-500"
-                            }`}
+                            className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition ${n.completed
+                              ? "border-emerald-500 bg-emerald-500"
+                              : "border-zinc-700 hover:border-violet-500"
+                              }`}
                           >
-                            {n.completed && <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round"><path d="M5 13l4 4L19 7"/></svg>}
+                            {n.completed && <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round"><path d="M5 13l4 4L19 7" /></svg>}
                           </button>
 
                           <div className="min-w-0 flex-1">
                             {/* Badges */}
                             <div className="flex flex-wrap items-center gap-2">
-                              <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide ${
-                                n.type === "task" ? "bg-amber-500/15 text-amber-300 border border-amber-500/20" :
+                              <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide ${n.type === "task" ? "bg-amber-500/15 text-amber-300 border border-amber-500/20" :
                                 n.type === "reminder" ? "bg-sky-500/15 text-sky-300 border border-sky-500/20" :
-                                "bg-zinc-700/50 text-zinc-300 border border-zinc-700"
-                              }`}>
+                                  "bg-zinc-700/50 text-zinc-300 border border-zinc-700"
+                                }`}>
                                 {n.type}
                               </span>
                               {n.important && (
@@ -726,11 +717,10 @@ export default function App() {
                                 <span className="text-[11px] text-zinc-500">Due {n.dueDate}</span>
                               )}
                               {n.reminderTime && !n.completed && (
-                                <span className={`rounded-full px-1.5 py-0.5 text-[10px] font-medium ${
-                                  n.alarmFired
-                                    ? "bg-zinc-700/50 text-zinc-500"
-                                    : "bg-rose-500/15 text-rose-300"
-                                }`}>
+                                <span className={`rounded-full px-1.5 py-0.5 text-[10px] font-medium ${n.alarmFired
+                                  ? "bg-zinc-700/50 text-zinc-500"
+                                  : "bg-rose-500/15 text-rose-300"
+                                  }`}>
                                   {n.alarmFired ? "🔕 Fired" : `🔔 ${new Date(n.reminderTime).toLocaleString()}`}
                                 </span>
                               )}
@@ -764,7 +754,7 @@ export default function App() {
                               className="rounded-lg p-1.5 text-zinc-500 hover:bg-sky-500/10 hover:text-sky-300"
                               title="Share via link"
                             >
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98" /></svg>
                             </button>
 
                             {/* Set alarm (for reminders or any note) */}
@@ -774,7 +764,7 @@ export default function App() {
                                 className="rounded-lg p-1.5 text-zinc-500 hover:bg-rose-500/10 hover:text-rose-300"
                                 title="Set alarm"
                               >
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="13" r="7"/><path d="M12 9v4l2.5 1.5"/><path d="M5 4 2 7M19 4l3 3"/></svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="13" r="7" /><path d="M12 9v4l2.5 1.5" /><path d="M5 4 2 7M19 4l3 3" /></svg>
                               </button>
                             ) : (
                               <button
@@ -782,7 +772,7 @@ export default function App() {
                                 className="rounded-lg p-1.5 text-rose-400 hover:bg-rose-500/10"
                                 title="Remove alarm"
                               >
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="13" r="7"/><path d="M5 4 2 7M19 4l3 3M9 13l3 3 3-3"/></svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="13" r="7" /><path d="M5 4 2 7M19 4l3 3M9 13l3 3 3-3" /></svg>
                               </button>
                             )}
 
@@ -795,7 +785,7 @@ export default function App() {
                               className="rounded-lg p-1.5 text-zinc-500 hover:bg-white/10 hover:text-zinc-200"
                               title="Edit"
                             >
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20h9" /><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" /></svg>
                             </button>
 
                             {/* Delete */}
@@ -804,7 +794,7 @@ export default function App() {
                               className="rounded-lg p-1.5 text-zinc-500 hover:bg-rose-500/10 hover:text-rose-300"
                               title="Delete"
                             >
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M8 6V4h8v2m-1 0v14a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2V6"/></svg>
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M8 6V4h8v2m-1 0v14a2 2 0 0 1-2 2H11a2 2 0 0 1-2-2V6" /></svg>
                             </button>
                           </div>
                         </div>
@@ -925,7 +915,7 @@ git push`,
         <div className="rounded-[28px] border border-white/10 bg-white/[0.04] p-8 backdrop-blur-xl">
           <h2 className="text-2xl font-semibold tracking-tight">Complete Setup Guide</h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-zinc-400">
-            Follow these steps to recreate this ScreenNotes app from zero, push it to GitHub, and work on it in VS Code.
+            Follow these steps to recreate this ScreenNote app from zero, push it to GitHub, and work on it in VS Code.
           </p>
 
           <div className="mt-8 space-y-6">
