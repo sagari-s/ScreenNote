@@ -1,5 +1,5 @@
 {
-  "name": "react-vite-tailwind",
+  "name": "screen-notes",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "clsx": "2.1.1",
+    "git": "^0.1.5",
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "tailwind-merge": "3.4.0",
